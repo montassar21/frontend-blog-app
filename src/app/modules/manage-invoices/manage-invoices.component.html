@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Actions
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Delete</a></li>
+            <hr class="dropdown-divider">
+            <li><a class="dropdown-item" href="#">Send To Client</a></li>
+            <hr class="dropdown-divider">
+            <li><a class="dropdown-item" href="#">Mark as Paid</a></li>
+            <hr class="dropdown-divider">
+            <li><a class="dropdown-item" href="#">Print PDF</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a href="#/invoices">  <button class="btn btn-outline-success" type="submit">New Invoice</button></a>
+    </div>
+  </div>
+</nav>
+<div class="pt-2">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card border-secondary p-4">
+            <form class="row g-3">
+              <div class="col-md-12">
+                <label for="inputClient" class="form-label">Client</label>
+                <input type="text" class="form-control" name="search" [(ngModel)]="searchText" id="inputClient" placeholder="Search by client name, email or invoice number ">
+              </div>
+
+
+
+              <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-secondary me-2" (click)="reset()">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div></div></div></div>
+
+          <table cellspacing="0" cellpadding="0" border="0" class="table table-hover mt-2">
+            <tbody>
+              <tr *ngFor="let invoice of allInvoices$|async |search:searchText;let i=index" class="table-light">
+                <!-- <td>{{invoice.id}}</td>
+                                <td>{{invoice.name}}</td> -->
+
+                <td>
+                    <div class="card-body">
+                      <h6 class="card-subtitle mb-3 text-muted">##{{invoice.number}}</h6>
+                      <h5 class="card-title">{{invoice.client.customerName}}</h5>
+                      <p class="card-text">{{invoice.client.address}}
+                        <br>
+                        <span class="card-text">{{invoice.client.inputCity}} {{invoice.client.state}} {{invoice.client.inputZip}}</span>
+                      </p>
+                    </div>
+                </td>
+                <td>
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-3 text-muted"><br></h6>
+                    <h5 class="card-title">Created</h5>
+                    <p class="card-text">{{invoice.createdAt}}</p>
+                  </div>
+              </td>
+              <td>
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-3 text-muted"><br></h6>
+                  <h5 class="card-title">{{invoice.total}}DT</h5>
+                  <a *ngIf="invoice.status=='Paid'" class="badge badge-success color-white">{{invoice.status}}</a>
+                  <a *ngIf="invoice.status=='Unpaid'" class="badge badge-primary color-white">{{invoice.status}}</a>
+
+                </div>
+            </td>
+
+
+           <td>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-3 text-muted"><br></h6>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <button class="dropdown-item" (click)="generatePDF('open',invoice)">View</button>
+                  <a class="dropdown-item" (click)="generatePDF('download',invoice)">Download</a>
+                  <button class="dropdown-item" (click)="generatePDF('print',invoice)">Print</button>
+                   <button class="dropdown-item" (click)="markAsPaid(invoice)">Mark as Paid </button>
+                <button class="dropdown-item" (click)="deleteInvoice(invoice._id)">Delete </button>
+
+
+                </div>
+              </div>
+            </div>
+
+          </td>
+              </tr>
+
+            </tbody>
+        </table>

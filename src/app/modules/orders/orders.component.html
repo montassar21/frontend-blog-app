@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="row text-center mt-2">
+  <button mat-button class="btn btn-primary"   (click)="openOrderModal('')"><i class="bi bi-plus-circle me-2">Add Order</i></button>
+</div>
+<div class="row">
+<table class="table table-dark table-striped mt-2">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Reference</th>
+      <th scope="col">Order date</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Total</th>
+      <th scope="col">Paid</th>
+      <th scope="col">Deliverer</th>
+      <th scope="col">Order Status</th>
+      <th scope="col">Payment Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of allOrders$ | async;let i = index">
+        <th scope="row">{{i+1}}</th>
+      <td>{{order.reference}}</td>
+      <td>{{order.orderDate}}</td>
+      <td>{{order.customer}}</td>
+      <td>{{order.total}}</td>
+
+      <td>{{order.paid}}</td>
+      <td>
+        <select class="form-select" style="background-color: transparent;color:white;border-color: white;" aria-label="Default select example"appearance="outline">
+          <option  *ngFor="let deliverer of allDeliverers$ | async"  [value]="deliverer._id">{{deliverer.name}}</option>
+        </select>
+      </td>
+      <td><a class="badge badge-primary color-white">{{order.orderStatus}}</a></td>
+      <td> <a class="badge badge-success color-white">{{order.payment_status}}</a></td>
+      <td>
+       <button class="btn btn-primary me-2" (click)="openOrderModal(order._id)"> <i class="bi bi-pencil me-2"></i>Edit</button>
+       <button class="btn btn-danger me-2" (click)="deleteOrder(order._id)"> <i class="bi bi-trash me-2"></i>Delete</button>
+
+
+       <!-- <a (click)="deleteOrder()"> <i class="bi bi-trash"></i></a> -->
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+
+<div id="ordersModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{orderModalTitle}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <mat-form-field class="input-group mb-3" appearance="outline">
+            <mat-label>Reference</mat-label>
+            <input  matInput placeholder="Reference"
+            [(ngModel)]="orderForm.reference" name="reference">
+          </mat-form-field>
+          <mat-form-field  class="input-group mb-3" appearance="outline">
+            <mat-label>Date</mat-label>
+            <input  type="date" matInput placeholder="Date"
+            [(ngModel)]="orderForm.orderDate" name="orderDate">
+          </mat-form-field>
+          <mat-form-field class="input-group mb-3" appearance="outline">
+            <mat-label>Customer </mat-label>
+            <input  matInput placeholder="Customer"
+            [(ngModel)]="orderForm.customer" name="customer">
+          </mat-form-field>
+          <mat-form-field appearance="outline"class="input-group mb-3">
+            <mat-label>Total</mat-label>
+            <input  matInput placeholder="Total"
+            [(ngModel)]="orderForm.total" name="total">
+          </mat-form-field>
+          <mat-form-field class="input-group mb-3" appearance="outline">
+            <mat-label>Paid</mat-label>
+            <input  matInput placeholder="Paid"
+            [(ngModel)]="orderForm.paid" name="paid">
+          </mat-form-field>
+          <div class="mb-5 " appearance="outline">
+          <select  class="form-select" aria-label="Default select example"  [(ngModel)]="orderForm.deliverer" name="deliverer">
+            <option class="m-3" *ngFor="let deliverer of allDeliverers$ | async"   [value]="deliverer._id">{{deliverer.name}}</option>
+          </select>
+        </div>
+          <mat-form-field  class="input-group mb-3" appearance="outline">
+            <mat-label>Order Price</mat-label>
+            <input matInput placeholder="Order Status"
+            [(ngModel)]="orderForm.orderStatus" name="orderStatus">
+          </mat-form-field>
+          <mat-form-field  class="input-group mb-3" appearance="outline">
+            <mat-label>Payment Status</mat-label>
+            <input  matInput placeholder="Payment Status"
+            [(ngModel)]="orderForm.payment_status" name="paument_status">
+          </mat-form-field>
+
+          <!-- <mat-form-field>
+            <mat-label>Expiration Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        <button type="button" class="btn btn-primary" (click)="saveorupdate()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

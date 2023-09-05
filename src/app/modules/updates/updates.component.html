@@ -1,0 +1,12 @@
+<div *ngFor="let product of allProducts$|async">
+  <div class="alert alert-danger d-flex align-items-center" role="alert"
+  *ngIf="product.quantity<=product.alert_quantity">
+    <svg class="bi flex-shrink-0 me-1" role="img" aria-label="Danger:">
+      <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <div>
+    Alert Quantity : Product Name : {{product.name}}
+    <br> Quantity Remaining : {{product.quantity}}
+    </div>
+  </div>
+</div>
