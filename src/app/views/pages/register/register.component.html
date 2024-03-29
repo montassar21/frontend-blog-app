@@ -1,7 +1,3 @@
-<img style="width:100px;height:50px;position:absolute;
-              top: 20px;
-              left:20px;" src="../../../../assets/images/logo-no-background.png" />
-
 <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
   <c-container>
     <c-row class="justify-content-center">
@@ -17,27 +13,24 @@
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Username"  name="username" formControlName="username"/>
+                <input autoComplete="name" cFormControl placeholder="Username"  name="name" formControlName="name"/>
               </c-input-group>
               <c-input-group class="mb-3">
-                <span cInputGroupText>@</span>
+                <span cInputGroupText><svg cIcon name="cilUser"></svg>
+</span>
                 <input autoComplete="email" cFormControl placeholder="Email"  name="email" formControlName="email"/>
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>@</span>
-                <input autoComplete="phone" cFormControl placeholder="Phone"  name="phone" formControlName="phone"/>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" formControlName="password1" />
+                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" formControlName="password" name="password" />
               </c-input-group>
               <c-input-group class="mb-4">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password"  formControlName="password2" />
+                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password"  formControlName="repassword" name="repassword" />
               </c-input-group>
               <div class="d-grid">
                 <button (click)="onSignup()" cButton color="primary">Create Account</button>

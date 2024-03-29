@@ -31,39 +31,30 @@ export class LoginComponent implements OnInit {
     }
 
     onLogin(){
-      if(this.loginForm.valid){
         //send the obj to database
           this.auth.login(this.loginForm.value).subscribe({
-          next:(response=>{
-            console.log(response);
+            next: (response => {
+              console.log(response);
+              this.auth.storeToken(response.token);
+              localStorage.setItem('currentUser', JSON.stringify(response.user));
 
-            this.auth.storeToken(response.token);
-            this.route.navigate(['dashboard']);
-            // this.toast.success({detail:"SUCCESS",summary:res.Message,duration:5000});
-    this._snackBar.open('Success !', 'Close', {
-        duration: 3000 // Duration in milliseconds
-      });
 
-            //  else if(res.Message=="Email does not exist.!")
-            //  else          this.toast.error({detail:"ERROR",summary:res.Message,duration:5000});
-            return response.token;
+             this._snackBar.open('Success !', 'Close', {
+          duration: 3000 // Duration in milliseconds
+         });
+            this.route.navigate(['posts']);
+            this.loginForm.reset();
+
               }),
           error:(err=>{
-          this._snackBar.open('Error : Login or password Incorrect !', 'Close', {
+          this._snackBar.open(err.error.error.message, 'Close', {
         duration: 3000 // Duration in milliseconds
     });
 
           })
         })
-      }
-      else{
-        //throw the error using toaster and with required field
-        // ValidateForm.vlidateAllFormFields(this.loginForm);
-         this._snackBar.open('Your form is invalid !', 'Close', {
-        duration: 3000 // Duration in milliseconds
-    });
 
-      }
+
     }
 
 }

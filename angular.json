@@ -42,7 +42,7 @@
               },
               {
                 "glob": "**.*",
-                "input": "../../stock_management/uploads/productsImages",
+                "input": "../../../../../../back-end-stock_management/uploads/productsImages/",
                 "output": "/photos/"
               }
             ],

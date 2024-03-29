@@ -53,63 +53,7 @@
     <a href="#/dashboard"><button class="btn btn-primary justify-content-end">Dashboard</button></a>
     </div>
   </div>
-  <ul class="list-group list-group-flush m-4">
 
-    <li class="list-group-item">Plan Consumption</li>
-    <li class="list-group-item">
-      <div class="row">
-      <div class="col-4 row">
-          <div class="col-8"><span>Invoices</span></div>
-          <div class="col-4"><span ><p>{{numberOfInvoices|async}}</p></span></div>
-     </div>
-      <div class="col-8">
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" [style.width.%]="(numberOfInvoices | async)"  aria-valuenow="${numberOfInvoices |async}" aria-valuemin="0" aria-valuemax="100">
-
-        </div>
-
-    </div>
-  </div>
-  </div>
-</li>
-    <li class="list-group-item"><div class="row">
-      <div class="col-4 row">
-        <div class="col-8"><span>Products</span></div>
-        <div class="col-4"><span>{{numberOfProducts|async}}</span></div>
-      </div>
-      <div class="col-8">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" [style.width.%]="(numberOfProducts | async)" aria-valuenow="${numberOfProducts |async}"  aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div></li>
-    <li class="list-group-item"><div class="row">
-      <div class="col-4 row">
-        <div class="col-8"><span>Clients</span></div>
-        <div class="col-4"><span>{{numberOfClients|async}}</span></div>
-      </div>
-      <div class="col-8">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" [style.width.%]="(numberOfClients | async)" aria-valuenow="${numberOfClients |async}" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div></li>
-    <li class="list-group-item"><div class="row">
-      <div class="col-4 row">
-        <div class="col-8"><span>Orders</span></div>
-        <div class="col-4"><span>{{numberOfOrders|async}}</span></div>
-      </div>
-      <div class="col-8">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" [style.width.%]="(numberOfOrders | async)"  aria-valuenow="10" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div></li>
-
-  </ul>
 
 </div>
 </div>

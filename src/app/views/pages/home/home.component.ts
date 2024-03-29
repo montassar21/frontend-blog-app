@@ -1,23 +1,30 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css','./home.component.scss'],
-
+  styleUrls: ['./home.component.css', './home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  user: any;
   @ViewChild('buttons', { static: true })
   buttons!: ElementRef;
-  constructor(private renderer:Renderer2) {
-
-  }
+  constructor(private renderer: Renderer2) {}
   ngOnInit(): void {
-console.log(this.buttons)
+    this.isLoggedIn();
+    console.log(this.isLoggedIn());
+    console.log(this.buttons);
 
-       const controlButtons = this.buttons.nativeElement.querySelectorAll('.control');
-console.log(controlButtons)
-    controlButtons.forEach((button:Element) => {
+    const controlButtons =
+      this.buttons.nativeElement.querySelectorAll('.control');
+    console.log(controlButtons);
+    controlButtons.forEach((button: Element) => {
       this.renderer.listen(button, 'click', () => {
         const activeButton = document.querySelector('.active-btn');
         if (activeButton) {
@@ -41,13 +48,13 @@ console.log(controlButtons)
       });
     });
   }
-
-  ngAfterViewInit() {
-
+  isLoggedIn(): boolean {
+    console.log(localStorage.getItem('currentUser'));
+    return localStorage.getItem('currentUser') != null;
   }
+
+  ngAfterViewInit() {}
   toggleTheme() {
     document.body.classList.toggle('light-mode');
   }
-
 }
-
